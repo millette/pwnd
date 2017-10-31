@@ -1,5 +1,8 @@
 'use strict'
 
+// npm
+require('dotenv').load()
+
 // core
 const crypto = require('crypto')
 const { promisify } = require('util')
@@ -8,9 +11,9 @@ const close = promisify(require('fs').close)
 const read = promisify(require('fs').read)
 const fstat = promisify(require('fs').fstat)
 
-const precision = 6
+const precision = process.env.precision || 6
 const lineLength = 42
-const size = 10000 * lineLength
+const size = (process.env.size || 10000) * lineLength
 const maxEstimate = parseInt('f'.repeat(precision), 16)
 const reDig = /^[0-9A-F]{40}$/
 

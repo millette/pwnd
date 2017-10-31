@@ -5,7 +5,11 @@
   "scripts": {
     "lint": "standard",
     "test": "standard && nyc ava",
-    "server": "node server"
+    "server": "node server",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   },
   "bin": [
     "cli.js",
@@ -20,6 +24,7 @@
   },
   "dependencies": {
     "async-lru": "^1.1.1",
+    "dotenv": "^4.0.0",
     "micro": "^9.0.0",
     "urlencoded-body-parser": "^2.0.1"
   }

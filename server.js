@@ -1,6 +1,7 @@
 'use strict'
 
 // npm
+require('dotenv').load()
 const micro = require('micro')
 const parse = require('urlencoded-body-parser')
 const AsyncLRU = require('async-lru')
@@ -11,8 +12,8 @@ const { promisify } = require('util')
 // self
 const isKnownPassword = require('.')
 
-const max = 100000
-const port = 3050
+const max = process.env.max || 100000
+const port = process.env.port || 3050
 
 const lru = new AsyncLRU({
   max,
