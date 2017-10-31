@@ -3,6 +3,6 @@
 // self
 const isKnownPassword = require('.')
 
-isKnownPassword('password')
+isKnownPassword(process.argv[2] || 'password')
   .then(console.log)
   .catch(console.error)
