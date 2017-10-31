@@ -30,4 +30,3 @@ test('hashed, small file', async t => {
   const ret = await fn('0000C1BDAB3A615C3B636084CC33171482948D5A', 1)
   t.is(ret, false)
 })
-
