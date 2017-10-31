@@ -11,7 +11,7 @@ test('password, small file', async t => {
   t.is(ret, true)
 })
 
-test('password, all files', async t => {
+test.skip('password, all files', async t => {
   const ret = await fn('password')
   t.is(ret, false)
 })
@@ -21,7 +21,7 @@ test('passétéword, small file', async t => {
   t.is(ret, true)
 })
 
-test('passétéword, all files', async t => {
+test.skip('passétéword, all files', async t => {
   const ret = await fn('passétéword')
   t.is(ret, true)
 })
