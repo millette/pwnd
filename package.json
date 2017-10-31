@@ -4,10 +4,21 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard index.js && nyc ava",
+    "serve": "node serve"
   },
+  "bin": [
+    "cli.js"
+  ],
   "license": "AGPL-3.0",
   "devDependencies": {
+    "ava": "^0.23.0",
+    "coveralls": "^3.0.0",
+    "nyc": "^11.2.1",
     "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "micro": "^9.0.0",
+    "urlencoded-body-parser": "^2.0.1"
   }
 }
