@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "standard index.js",
-    "test": "standard index.js && nyc ava",
-    "serve": "node serve"
+    "lint": "standard",
+    "test": "standard && nyc ava",
+    "server": "node server"
   },
   "bin": [
-    "cli.js"
+    "cli.js",
+    "server.js"
   ],
   "license": "AGPL-3.0",
   "devDependencies": {
@@ -18,6 +19,7 @@
     "standard": "^10.0.3"
   },
   "dependencies": {
+    "async-lru": "^1.1.1",
     "micro": "^9.0.0",
     "urlencoded-body-parser": "^2.0.1"
   }
