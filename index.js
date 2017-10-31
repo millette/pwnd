@@ -4,6 +4,7 @@
 const crypto = require('crypto')
 const { promisify } = require('util')
 const open = promisify(require('fs').open)
+const close = promisify(require('fs').close)
 const read = promisify(require('fs').read)
 const fstat = promisify(require('fs').fstat)
 
@@ -21,6 +22,9 @@ const makeDig = (pw) => {
   return hash.digest('hex').toUpperCase()
 }
 
+const doneNotFound = (found) => { return { found } }
+const doneFound = () => doneNotFound(true)
+
 const binarySearch = async ({ fd, fsize, pw }) => {
   const dig = makeDig(pw)
   let lowest = 0
@@ -30,13 +34,13 @@ const binarySearch = async ({ fd, fsize, pw }) => {
     const buf = Buffer.alloc(size)
     const { buffer } = await read(fd, buf, 0, size, pos)
     const found = buffer.indexOf(dig)
-    if (found !== -1) { return { found: true } }
+    if (found !== -1) { return close(fd).then(doneFound) }
     const c = buffer.toString().split('\r\n').filter(Boolean)
     if (dig < c[0]) {
       highest = pos + buffer.length
       return newSearch()
     }
-    if (dig < c[c.length - 1]) { return { found: false } }
+    if (dig < c[c.length - 1]) { return close(fd).then(doneNotFound) }
     lowest = pos
     return newSearch()
   }
@@ -53,21 +57,15 @@ const searchPasswordIn = async (pw, fn) => {
   } catch (error) { return { error } }
 }
 
-const isKnownPassword = (pw) => Promise.all([
-  searchPasswordIn(pw, 'pwned-passwords-1.0.txt'),
-  searchPasswordIn(pw, 'pwned-passwords-update-1.txt'),
-  searchPasswordIn(pw, 'pwned-passwords-update-2.txt')
-])
-  .then((x) => x.filter((y) => y.found).length === 0)
+const pwnedFiles = [
+  'pwned-passwords-update-2.txt',
+  'pwned-passwords-update-1.txt',
+  'pwned-passwords-1.0.txt'
+]
 
-/*
-  .then((x) => {
-    let found = false
-    x.forEach((y) => { found = found || y.found })
-    return !found
-  })
-*/
-
-isKnownPassword('piesapple')
-  .then(console.log)
-  .catch(console.error)
+module.exports = (pw, n) => {
+  const files = n ? pwnedFiles.slice(0, n) : pwnedFiles.slice()
+  const fn = searchPasswordIn.bind(null, pw)
+  return Promise.all(files.map(fn))
+    .then((x) => x.filter((y) => y.found).length === 0)
+}

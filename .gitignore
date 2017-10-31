@@ -1,4 +1,4 @@
-heha*
 *.txt
 *.7z
 node_modules
+.nyc_output
