@@ -21,8 +21,7 @@ const client = (pw) => new Promise(
       res.on('end', () => {
         if (!str) { return reject(new Error('Response was empty.')) }
         try {
-          const j = JSON.parse(str)
-          resolve(j.ok)
+          resolve(JSON.parse(str).ok)
         } catch (e) {
           reject(e)
         }

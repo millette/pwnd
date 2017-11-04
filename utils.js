@@ -6,6 +6,7 @@ const ProgressBar = require('progress')
 const pipe = require('pump')
 const through = require('through2')
 const concat = require('concat-stream')
+const disk = require('diskusage')
 
 // core
 const https = require('https')
@@ -126,4 +127,6 @@ const check = (bin, file) => checkTxtFile(file)
   .catch(() => download(file))
   .then((x) => x ? unzip(bin, file) : false)
 
-module.exports = { wrkName, pwndFiles, which7z, check }
+const diskCheck = disk.check.bind(disk, '.')
+
+module.exports = { wrkName, pwndFiles, which7z, check, diskCheck }
