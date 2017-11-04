@@ -21,6 +21,20 @@ You only have to run this once. If you run it again, it will verify the SHA1 sig
 
 The plan is to eventually automate this process, perhaps even have the password files available through [dat][] (peer-to-peer).
 
+If you have dat and want to help share bandwidth costs, you can download the 3 files with:
+
+```
+dat clone dat://d5910c23a5d3468d74d0f0f9b76fb8b6e15068fa253b0c9bafd8a021dac62fe3 dat
+node scripts/init # will skip the download, but will verify and decompress in the correct place
+```
+
+If you already used dat to get the 3 password files and would like to share them:
+
+```
+cd dat
+dat . # ctrl-c to end sharing
+```
+
 ## Command-line interface
 A small cli is provided:
 
