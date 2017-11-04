@@ -60,7 +60,9 @@ const searchPasswordIn = async (pw, fn) => {
     const fd = await open(fn, 'r')
     const { size } = await fstat(fd)
     return Promise.resolve({ fd, fsize: size, pw }).then(binarySearch)
-  } catch (error) { return { error } }
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }
 
 const pwndFiles = utils.pwndFiles.files.map(utils.wrkName).reverse()
