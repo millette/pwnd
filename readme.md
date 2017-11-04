@@ -16,9 +16,7 @@ You'll need the latest LTS, node 8.9.0 or above.
 You'll need [7zip][] or 7zip-full to decompress. 7zip is sufficient.
 
 ## Password files
-Grab the 3 password files from <https://haveibeenpwned.com/Passwords>, about 5.4 GiB in total, and decompress them where you installed this package.
-
-Decompress all 3 text files to the wrk/ directory.
+Grab the 3 password files from <https://haveibeenpwned.com/Passwords>, about 5.4 GiB in total, and decompress them to the wrk/ directory.
 
 The simplest way to download and decompress the files is with the init.js script:
 
@@ -28,7 +26,7 @@ node scripts/init
 
 You only have to run this once. If you run it again, it will verify the SHA1 signatures only.
 
-You can safely delete dat/*.txt.7z after running init successfully if you don't plan on sharing those files with dat. Running init again will pick up the wrk/*.txt files, which are required.
+You can safely delete dat/\*.txt.7z after running init successfully if you don't plan on sharing those files with dat. Running init again will pick up the wrk/\*.txt files, which are required.
 
 The plan is to eventually automate this process, perhaps even have the password files available through [dat][] (peer-to-peer).
 
