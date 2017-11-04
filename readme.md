@@ -95,6 +95,9 @@ size=10000
 
 "precision" and "size" can both be tweaked to tune the binary search.
 
+## License
+AGPL-v3 © [Robin Millette](http://robin.millette.info)
+
 [dat]: https://datproject.org/
 [haveibeenpwned]: https://haveibeenpwned.com/
 [7zip]: http://www.7-zip.org/
