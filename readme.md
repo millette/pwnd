@@ -70,6 +70,13 @@ curl http://localhost:3050/ -d password=apple
 
 The password key is required. The JSON response will have a boolean "ok" key: true means the password is absent from the password files; false means it's in (or out) there and you should not (re)use it.
 
+Once you have the server running, you can open another terminal and now have a slightly faster cli:
+
+```
+node cli --use-server # tests "password" by default
+node cli banana -s # order doesn't matter; -s is an alias for --use-server
+```
+
 ## Configuration
 You can set values in the environment (which takes precedence) or in the .env file. Out of the box, the content is the following, which are also the hardcoded default values.
 
