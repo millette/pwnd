@@ -5,3 +5,4 @@ node_modules
 dat
 wrk
 yarn-error.log
+package-lock.json
