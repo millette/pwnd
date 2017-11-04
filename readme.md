@@ -59,6 +59,8 @@ node cli # tests "password" by default
 node cli banana # tests the given argument
 ```
 
+Careful to quote complicated passwords on the command-line, perhaps start with 'password'.
+
 ## http server
 A small web server is provided, responding to POST queries only.
 
@@ -76,6 +78,8 @@ Once you have the server running, you can open another terminal and now have a s
 node cli --use-server # tests "password" by default
 node cli banana -s # order doesn't matter; -s is an alias for --use-server
 ```
+
+Careful to quote complicated passwords on the command-line, perhaps start with 'password'.
 
 ## Configuration
 You can set values in the environment (which takes precedence) or in the .env file. Out of the box, the content is the following, which are also the hardcoded default values.
