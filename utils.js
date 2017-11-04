@@ -14,6 +14,9 @@ const { basename } = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
 
+// self
+const pwndFiles = require('./files.json')
+
 const opt = {
   width: 25,
   head: '>',
@@ -55,8 +58,6 @@ const unzip = (bin, file) => new Promise((resolve, reject) => {
     reject(new Error(`Unexpected error code: ${code} ${steps.error && steps.error.toString()} ${(steps.pipe && steps.pipe.error) || ''}`))
   })
 })
-
-const pwndFiles = require('./files.json')
 
 const checkFile = (type, file) => new Promise((resolve, reject) => {
   if (type !== 'txt' && type !== '7z') { return reject(new Error('Bad type: txt or 7z expected')) }
@@ -125,4 +126,4 @@ const check = (bin, file) => checkTxtFile(file)
   .catch(() => download(file))
   .then((x) => x ? unzip(bin, file) : false)
 
-module.exports = { pwndFiles, unzip, which7z, checkTxtFile, check7zFile, download, check }
+module.exports = { wrkName, pwndFiles, which7z, check }

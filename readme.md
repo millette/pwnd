@@ -6,8 +6,17 @@
 
 This module would not be possible without the [haveibeenpwned][] project.
 
+## Requirements
+Written in server-side JavaScript and tested on Debian GNU/Linux.
+
+### node
+You'll need the latest LTS, node 8.9.0 or above.
+
+### 7-zip
+You'll need [7zip][] or 7zip-full to decompress. 7zip is sufficient.
+
 ## Password files
-Grab the 3 password files from <https://haveibeenpwned.com/Passwords>, about 5.4 GiB in total, and decompress them where you installed this package. You'll need [7zip][] or 7zip-full to decompress. 7zip is sufficient.
+Grab the 3 password files from <https://haveibeenpwned.com/Passwords>, about 5.4 GiB in total, and decompress them where you installed this package.
 
 Decompress all 3 text files to the wrk/ directory.
 

@@ -10,7 +10,6 @@ const open = promisify(require('fs').open)
 const close = promisify(require('fs').close)
 const read = promisify(require('fs').read)
 const fstat = promisify(require('fs').fstat)
-const { basename } = require('path')
 
 // self
 const utils = require('./utils')
@@ -64,7 +63,7 @@ const searchPasswordIn = async (pw, fn) => {
   } catch (error) { return { error } }
 }
 
-const pwndFiles = utils.pwndFiles.files.map((x) => 'wrk/' + basename(x.url, '.7z')).reverse()
+const pwndFiles = utils.pwndFiles.files.map(utils.wrkName).reverse()
 
 module.exports = (pw, n) => {
   const files = n ? pwndFiles.slice(0, n) : pwndFiles.slice()
