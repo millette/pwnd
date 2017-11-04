@@ -14,6 +14,8 @@ const { basename } = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
 
+const width = 25
+
 const which7z = (p) => new Promise((resolve, reject) => p
   ? which(p, (e, p7) => e ? reject(e) : resolve(p7))
   : which('7zr', (e1, p7zr) =>
@@ -28,7 +30,7 @@ const unzip = (bin, file) => new Promise((resolve, reject) => {
   const ls = spawn(bin, ['e', '-so', 'dat/' + file.url])
   const opt = {
     total: file.size,
-    width: 30,
+    width,
     head: '>',
     renderThrottle: 200,
     callback: () => { steps.callback = true }
@@ -64,7 +66,7 @@ const checkFile = (type, file) => new Promise((resolve, reject) => {
 
     const opt = {
       total: file[sizeType],
-      width: 30,
+      width,
       head: '>',
       renderThrottle: 200,
       callback: () => { console.log('el callback') }
@@ -102,7 +104,7 @@ const download = (file) => new Promise((resolve, reject) => {
     const out = fs.createWriteStream('dat/' + file.url)
     const opt = {
       total: file.size7z,
-      width: 30,
+      width,
       head: '>',
       renderThrottle: 200
     }

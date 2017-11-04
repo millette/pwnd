@@ -58,13 +58,13 @@ const binarySearch = async ({ fd, fsize, pw }) => {
 
 const searchPasswordIn = async (pw, fn) => {
   try {
-    const fd = await open('wrk/' + fn, 'r')
+    const fd = await open(fn, 'r')
     const { size } = await fstat(fd)
     return Promise.resolve({ fd, fsize: size, pw }).then(binarySearch)
   } catch (error) { return { error } }
 }
 
-const pwndFiles = utils.pwndFiles.files.map((x) => basename(x.url, '.7z')).reverse()
+const pwndFiles = utils.pwndFiles.files.map((x) => 'wrk/' + basename(x.url, '.7z')).reverse()
 
 module.exports = (pw, n) => {
   const files = n ? pwndFiles.slice(0, n) : pwndFiles.slice()
