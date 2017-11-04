@@ -9,10 +9,15 @@ This module would not be possible without the [haveibeenpwned][] project.
 ## Password files
 Grab the 3 password files from <https://haveibeenpwned.com/Passwords>, about 5.4 GiB in total, and decompress them where you installed this package. You'll need [7zip][] or 7zip-full to decompress. 7zip is sufficient.
 
+Decompress all 3 text files to the wrk/ directory.
+
+The simplest way to download and decompress the files is with the init.js script:
+
 ```
-7zr e pwned-passwords-update-2.txt.7z # with 7zip
-7z e pwned-passwords-update-2.txt.7z # with 7zip-full
+node scripts/init
 ```
+
+You only have to run this once. If you run it again, it will verify the SHA1 signatures only.
 
 The plan is to eventually automate this process, perhaps even have the password files available through [dat][] (peer-to-peer).
 
