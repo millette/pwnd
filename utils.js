@@ -17,7 +17,7 @@ const { spawn } = require('child_process')
 const opt = {
   width: 25,
   head: '>',
-  renderThrottle: 200,
+  renderThrottle: 200
 }
 
 const which7z = (p) => new Promise((resolve, reject) => p
