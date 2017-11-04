@@ -21,6 +21,13 @@ You only have to run this once. If you run it again, it will verify the SHA1 sig
 
 The plan is to eventually automate this process, perhaps even have the password files available through [dat][] (peer-to-peer).
 
+### Dat
+You can also use [dat][] to download the files. It's not needed for scripts/init.js to work but it can help spread these password files. If you don't have the dat cli:
+
+```
+npm install -g dat
+```
+
 If you have dat and want to help share bandwidth costs, you can download the 3 files with:
 
 ```
