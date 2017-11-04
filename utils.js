@@ -27,14 +27,18 @@ const which7z = (p) => new Promise((resolve, reject) => p
   )
 )
 
+const wrkName = (file) => 'wrk/' + basename(file.url, '.7z')
+const datName = (file) => 'dat/' + file.url
+const barString = (type, file) => `:bar :elapsed - eta :eta ${basename(file.url, '.txt.7z')} ${type}`
+
 const unzip = (bin, file) => new Promise((resolve, reject) => {
   const sha1 = crypto.createHash('sha1')
   const steps = {}
-  const out = fs.createWriteStream('wrk/' + basename(file.url, '.7z'))
-  const ls = spawn(bin, ['e', '-so', 'dat/' + file.url])
+  const out = fs.createWriteStream(wrkName(file))
+  const ls = spawn(bin, ['e', '-so', datName(file)])
   opt.total = file.size
   opt.callback = () => { steps.callback = true }
-  const bar = new ProgressBar(`:bar :elapsed - eta :eta ${basename(file.url, '.txt.7z')}`, opt)
+  const bar = new ProgressBar(barString('unzip', file), opt)
   const tick = (data) => bar.tick(data.length)
   ls.stdout.on('data', tick)
   ls.stdout.on('data', sha1.update.bind(sha1))
@@ -56,14 +60,14 @@ const pwndFiles = require('./files.json')
 
 const checkFile = (type, file) => new Promise((resolve, reject) => {
   if (type !== 'txt' && type !== '7z') { return reject(new Error('Bad type: txt or 7z expected')) }
-  const filename = type === 'txt' ? `wrk/${basename(file.url, '.7z')}` : `dat/${file.url}`
+  const filename = type === 'txt' ? wrkName(file) : datName(file)
   const sizeType = type === 'txt' ? 'size' : 'size7z'
   fs.stat(filename, (err, b) => {
     if (err) { return reject(err) }
     if (b.size !== file[sizeType]) { return reject(new Error('Sizes don\'t match')) }
     opt.total = file[sizeType]
     delete opt.callback
-    const bar = new ProgressBar(`:bar :elapsed - eta :eta ${basename(file.url, '.txt.7z')}`, opt)
+    const bar = new ProgressBar(barString('sha1', file), opt)
     const tru = through((chunk, enc, cb) => {
       bar.tick(chunk.length)
       cb(null, chunk)
@@ -92,10 +96,10 @@ const download = (file) => new Promise((resolve, reject) => {
     const len = res.headers && res.headers['content-length'] && parseInt(res.headers['content-length'], 10)
     if (len !== file.size7z) { return reject(new Error('File size doesn\'t match')) }
     const sha1 = crypto.createHash('sha1')
-    const out = fs.createWriteStream('dat/' + file.url)
+    const out = fs.createWriteStream(datName(file))
     opt.total = file.size7z
     delete opt.callback
-    const bar = new ProgressBar(`:bar :elapsed - eta :eta ${basename(file.url, '.txt.7z')}`, opt)
+    const bar = new ProgressBar(barString('download', file), opt)
     const tick = (data) => bar.tick(data.length)
     const update = sha1.update.bind(sha1)
     res.on('data', tick)
