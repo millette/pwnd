@@ -27,6 +27,7 @@
   "dependencies": {
     "async-lru": "^1.1.1",
     "concat-stream": "^1.6.0",
+    "diskusage": "^0.2.4",
     "dotenv": "^4.0.0",
     "micro": "^9.0.1",
     "progress": "^2.0.0",

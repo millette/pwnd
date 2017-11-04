@@ -1213,6 +1213,12 @@ detective@^4.0.0:
     acorn "^4.0.3"
     defined "^1.0.0"
 
+diskusage@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/diskusage/-/diskusage-0.2.4.tgz#e956f7a1051e0c6a1af706154efe620a2ee432ec"
+  dependencies:
+    nan "^2.5.0"
+
 doctrine@1.5.0, doctrine@^1.2.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
@@ -2738,7 +2744,7 @@ mute-stream@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
 
-nan@^2.3.0:
+nan@^2.3.0, nan@^2.5.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
 
