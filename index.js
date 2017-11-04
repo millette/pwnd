@@ -10,6 +10,10 @@ const open = promisify(require('fs').open)
 const close = promisify(require('fs').close)
 const read = promisify(require('fs').read)
 const fstat = promisify(require('fs').fstat)
+const { basename } = require('path')
+
+// self
+const utils = require('./utils')
 
 const precision = process.env.precision || 6
 const lineLength = 42
@@ -54,20 +58,16 @@ const binarySearch = async ({ fd, fsize, pw }) => {
 
 const searchPasswordIn = async (pw, fn) => {
   try {
-    const fd = await open(fn, 'r')
+    const fd = await open('wrk/' + fn, 'r')
     const { size } = await fstat(fd)
     return Promise.resolve({ fd, fsize: size, pw }).then(binarySearch)
   } catch (error) { return { error } }
 }
 
-const pwnedFiles = [
-  'pwned-passwords-update-2.txt',
-  'pwned-passwords-update-1.txt',
-  'pwned-passwords-1.0.txt'
-]
+const pwndFiles = utils.pwndFiles.files.map((x) => basename(x.url, '.7z')).reverse()
 
 module.exports = (pw, n) => {
-  const files = n ? pwnedFiles.slice(0, n) : pwnedFiles.slice()
+  const files = n ? pwndFiles.slice(0, n) : pwndFiles.slice()
   const fn = searchPasswordIn.bind(null, pw)
   return Promise.all(files.map(fn))
     .then((x) => x.filter((y) => y.found).length === 0)

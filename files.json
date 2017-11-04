@@ -1,0 +1,32 @@
+{
+  "urlRoot": "https://downloads.pwnedpasswords.com/passwords/",
+  "files": [
+    {
+      "url": "pwned-passwords-1.0.txt.7z",
+      "sha1": {
+        "7z": "90d57d16a2dfe00de6cc58d0fa7882229ace4a53",
+        "txt": "d3f3ba6d05b9b451c2b59fd857d94ea421001b16"
+      },
+      "size7z": 5702869528,
+      "size": 12862899504
+    },
+    {
+      "url": "pwned-passwords-update-1.txt.7z",
+      "sha1": {
+        "7z": "00fc585efad08a4b6323f8e4196aae9207f8b09f",
+        "txt": "3fe6457fa8be6da10191bffa0f4cec43603a9f56"
+      },
+      "size7z": 262300582,
+      "size": 574389228
+    },
+    {
+      "url": "pwned-passwords-update-2.txt.7z",
+      "sha1": {
+        "7z": "20318090278bbd196945025bc7bf93e99f261f9a",
+        "txt": "e25f7710541c11a416de9d027911005e59e8b071"
+      },
+      "size7z": 8000810,
+      "size": 16791180
+    }
+  ]
+}
