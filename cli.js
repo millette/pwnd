@@ -16,18 +16,19 @@ const client = (pw) => new Promise(
   (resolve, reject) => http.request(
     Object.assign({ method: 'POST' }, url.parse(`http://localhost:${process.env.port || 3050}/`)),
     (res) => {
-    let str = ''
-    res.on('data', (d) => { str += d })
-    res.on('end', () => {
-      if (!str) { return reject(new Error('Response was empty.')) }
-      try {
-        const j = JSON.parse(str)
-        resolve(j.ok)
-      } catch (e) {
-        reject(e)
-      }
-    })
-  })
+      let str = ''
+      res.on('data', (d) => { str += d })
+      res.on('end', () => {
+        if (!str) { return reject(new Error('Response was empty.')) }
+        try {
+          const j = JSON.parse(str)
+          resolve(j.ok)
+        } catch (e) {
+          reject(e)
+        }
+      })
+    }
+  )
     .on('error', (error) => {
       console.error(error)
       reject(error)
