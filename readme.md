@@ -28,6 +28,8 @@ node scripts/init
 
 You only have to run this once. If you run it again, it will verify the SHA1 signatures only.
 
+You can safely delete dat/*.txt.7z after running init successfully if you don't plan on sharing those files with dat. Running init again will pick up the wrk/*.txt files, which are required.
+
 The plan is to eventually automate this process, perhaps even have the password files available through [dat][] (peer-to-peer).
 
 ### Dat
