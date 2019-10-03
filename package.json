@@ -22,7 +22,7 @@
     "coveralls": "^3.0.0",
     "dependency-check": "^2.9.1",
     "nyc": "^11.3.0",
-    "standard": "^10.0.3"
+    "standard": "^14.3.1"
   },
   "dependencies": {
     "async-lru": "^1.1.1",
