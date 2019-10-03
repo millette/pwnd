@@ -11,20 +11,20 @@ const password = args.filter((x) => x[0] !== '-')[0] || 'password'
 const url = Object.assign({ method: 'POST' }, parse(`http://localhost:${process.env.port || 3050}/`))
 
 const client = (pw) => new Promise((resolve, reject) => http
-    .request(url, (res) => {
-      let str = ''
-      res.on('data', (d) => { str += d })
-      res.on('end', () => {
-        if (!str) { return reject(new Error('Response was empty.')) }
-        try {
-          resolve(JSON.parse(str).ok)
-        } catch (e) {
-          reject(e)
-        }
-      })
+  .request(url, (res) => {
+    let str = ''
+    res.on('data', (d) => { str += d })
+    res.on('end', () => {
+      if (!str) { return reject(new Error('Response was empty.')) }
+      try {
+        resolve(JSON.parse(str).ok)
+      } catch (e) {
+        reject(e)
+      }
     })
-    .on('error', reject)
-    .end(`password=${encodeURIComponent(pw)}`)
+  })
+  .on('error', reject)
+  .end(`password=${encodeURIComponent(pw)}`)
 )
 
 const isKnownPassword = args.filter((x) => serverFlags.indexOf(x) !== -1).length ? client : require('.')
